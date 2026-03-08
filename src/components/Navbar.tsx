@@ -10,6 +10,8 @@ const navItems = [
   { label: "About & Gallery", path: "/about" },
 ];
 
+const authItems = [{ label: "Sign In", path: "/signin" }];
+
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -70,6 +72,19 @@ const Navbar = () => {
             })}
           </ul>
 
+          <ul className="flex items-center gap-4">
+            {authItems.map((item) => (
+              <li key={item.path}>
+                <Link
+                  to={item.path}
+                  className="font-body text-[11px] font-bold uppercase tracking-[0.15em] text-muted-foreground hover:text-foreground transition-colors duration-300"
+                >
+                  {item.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+
           <Link
             to="/reservations"
             className="relative overflow-hidden border border-primary/50 px-8 py-2.5 font-body text-[10px] font-bold uppercase tracking-[0.2em] text-primary transition-all hover:bg-primary hover:text-black"
@@ -113,6 +128,22 @@ const Navbar = () => {
                         ? "text-primary"
                         : "text-foreground"
                     }`}
+                  >
+                    {item.label}
+                  </Link>
+                </motion.li>
+              ))}
+              {authItems.map((item, i) => (
+                <motion.li
+                  key={item.path}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.3 + i * 0.1 }}
+                >
+                  <Link
+                    to={item.path}
+                    onClick={() => setIsOpen(false)}
+                    className="font-heading text-2xl font-light tracking-widest text-foreground"
                   >
                     {item.label}
                   </Link>
